@@ -174,6 +174,22 @@ function Layout({ children }: LayoutProps): React.ReactElement {
         />
       </div>
 
+  // إنشاء عنصر الماوس الذهبي
+  const cursor = document.createElement('div');
+  cursor.className = 'custom-cursor';
+  document.body.appendChild(cursor);
+
+  const moveCursor = (e: MouseEvent) => {
+    cursor.style.left = `${e.clientX}px`;
+    cursor.style.top = `${e.clientY}px`;
+  };
+  window.addEventListener('mousemove', moveCursor);
+
+  return () => {
+    window.removeEventListener('mousemove', moveCursor);
+    cursor.remove();
+  };
+}, []);
       <Header />
       <SocialSidebar />
       
